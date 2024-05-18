@@ -15,24 +15,24 @@ with gr.Blocks() as demo:
                 retrieval01_chunk = gr.Textbox(label="Chunk 1")
                 with gr.Row():
                     retrieval01_file = gr.Textbox(scale=2, label="File containing chunk 1")
-                    retrieval01_feedback = gr.Radio(choices=["Good", "Bad"], value="Good", label="Feedback for chunk 1")
+                    retrieval01_feedback = gr.Radio(choices=[("Good", True), ("Bad", False)], value=True, label="Feedback for chunk 1")
             with gr.Group():
                 retrieval02_chunk = gr.Textbox(label="Chunk 2")
                 with gr.Row():
                     retrieval02_file = gr.Textbox(scale=2, label="File containing chunk 2")
-                    retrieval02_feedback = gr.Radio(choices=["Good", "Bad"], value="Good", label="Feedback for chunk 2")
+                    retrieval02_feedback = gr.Radio(choices=[("Good", True), ("Bad", False)], value=True, label="Feedback for chunk 2")
                     
             with gr.Group():
                 retrieval03_chunk = gr.Textbox(label="Chunk 3")
                 with gr.Row():
                     retrieval03_file = gr.Textbox(scale=2, label="File containing chunk 3")
-                    retrieval03_feedback = gr.Radio(choices=["Good", "Bad"], value="Good", label="Feedback for chunk 3")
+                    retrieval03_feedback = gr.Radio(choices=[("Good", True), ("Bad", False)], value=True, label="Feedback for chunk 3")
 
             with gr.Group():
                 retrieval04_chunk = gr.Textbox(label="Chunk 4")
                 with gr.Row():
                     retrieval04_file = gr.Textbox(scale=2, label="File containing chunk 4")
-                    retrieval04_feedback = gr.Radio(choices=["Good", "Bad"], value="Good", label="Feedback for chunk 4")
+                    retrieval04_feedback = gr.Radio(choices=[("Good", True), ("Bad", False)], value=True, label="Feedback for chunk 4")
 
         with gr.Column():
             chatbot = gr.Chatbot(show_copy_button=True, likeable=True, show_share_button=True)
@@ -56,7 +56,7 @@ with gr.Blocks() as demo:
         feedback = args[4:]
         valid_results = []
         for feedback, chunk in zip(feedback, chunks):
-            if feedback == "Good":
+            if feedback:
                 valid_results.append(chunk)
         bot_message = random.choice(["How are you?", "I love you", "I'm very hungry"]) + '\n' + '\n'.join(valid_results)
         chat_history.append((message, bot_message))
